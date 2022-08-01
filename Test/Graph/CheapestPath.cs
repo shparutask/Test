@@ -32,13 +32,13 @@ namespace Test.Graph
                         }
                     }
                 }
-                int min_dist = int.MaxValue;
+                int min_price = int.MaxValue;
                 for (int i = 0; i < _BusGraph.NodesCount; i++)
                 {
-                    if (!_InTree[i] && _Weight[i] < min_dist)
+                    if (!_InTree[i] && _Weight[i] < min_price)
                     {
                         cur = i;
-                        min_dist = _Weight[i];
+                        min_price = _Weight[i];
                     }
                 }
             }
@@ -46,7 +46,21 @@ namespace Test.Graph
 
         protected override string GetResult(List<int> path)
         {
-            return string.Join(' ', path.ToArray());
+            var travelCost = 0;
+            var busNumber = 0;
+
+            for (int i = 0; i < path.Count - 1; i++)
+            {
+                var curBus = _BusList.First(x => x.BusNumber == _BusGraph.Graph[path[i] - 1, path[i + 1] - 1].BusNumber);
+
+                if (busNumber != curBus.BusNumber)
+                {
+                    travelCost += curBus.Price;
+                    busNumber = curBus.BusNumber;
+                }
+            }
+
+            return $"{ string.Join(' ', path.ToArray()) } Price: {travelCost}";
         }
     }
 }

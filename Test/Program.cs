@@ -22,9 +22,11 @@ namespace Test
             var graph = new BusGraph(file);
 
             SearchPathBase pathSearcher = new FastestPath(graph, startTime);
+            Console.WriteLine("The fastest path is");
             Console.WriteLine(pathSearcher.Dijkstra(startStation, finishStation));
 
             pathSearcher = new CheapestPath(graph);
+            Console.WriteLine("The cheapest path is");
             Console.WriteLine(pathSearcher.Dijkstra(startStation, finishStation));
 
             Console.ReadKey();

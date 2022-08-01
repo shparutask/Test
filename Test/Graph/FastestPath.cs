@@ -52,7 +52,7 @@ namespace Test.Graph
 
         protected override string GetResult(List<int> path)
         {
-            return $"{string.Join(' ', path.ToArray())} { times[_Finish] }";
+            return $"{string.Join(' ', path.ToArray())} Arrival Time: { times[_Finish] }";
         }
 
         private int transferTime(Node curNode, TimeSpan curTime)
